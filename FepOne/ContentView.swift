@@ -7,18 +7,24 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Hello, World!")
+                .padding(20)
+                .background(.blue)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+            Image (systemName:"globe")
         }
-        .padding()
     }
 }
 
-#Preview {
+//func helovu() -> Text{
+  //  return Text("Hellovu123")
+//}
+
+
+#Preview{
     ContentView()
 }
