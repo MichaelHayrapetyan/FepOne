@@ -11,6 +11,7 @@ import Combine
 struct ContentView: View {
     @State private var now = Date()
     @State private var is24Hour = false
+    @State private var isPressed = false
 
     private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
@@ -27,8 +28,20 @@ struct ContentView: View {
             .background(.black).opacity(0.75)
             .foregroundStyle(.green)
             .clipShape(RoundedRectangle(cornerRadius: 20))
+            .scaleEffect(isPressed ? 0.9 : 1.0)
+            .shadow(color: .green.opacity(isPressed ? 0.8 : 0.3),
+                    radius: isPressed ? 20 : 8)
+            .animation(.spring(response: 0.3, dampingFraction: 0.5), value: isPressed)
+            .animation(.easeInOut(duration: 0.25), value: is24Hour)
+            .contentTransition(.numericText())
             .onTapGesture {
-                is24Hour.toggle()
+                isPressed = true
+                withAnimation(.easeInOut(duration: 0.25)) {
+                    is24Hour.toggle()
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                    isPressed = false
+                }
             }
             .onReceive(timer) { input in
                 now = input
