@@ -29,8 +29,6 @@ struct ContentView: View {
             .foregroundStyle(.green)
             .clipShape(RoundedRectangle(cornerRadius: 20))
             .scaleEffect(isPressed ? 0.9 : 1.0)
-            .shadow(color: .green.opacity(isPressed ? 0.8 : 0.3),
-                    radius: isPressed ? 20 : 8)
             .animation(.spring(response: 0.3, dampingFraction: 0.5), value: isPressed)
             .animation(.easeInOut(duration: 0.25), value: is24Hour)
             .contentTransition(.numericText())
